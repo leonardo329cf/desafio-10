@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Movie } from '../../types/movie';
-import { Genre } from '../../types/genre';
 import MovieCard from '../../components/MovieCard';
 import { SpringPage } from '../../types/spring';
 import { useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import CardLoader from './CardLoader';
+import Pagination from '../../components/Pagination';
 
 import './styles.css';
 
@@ -58,6 +58,14 @@ const Movies = () => {
                 </div>
               ))
             )}
+          </div>
+
+          <div className="row">
+            <Pagination
+              pageCount={page ? page.totalPages : 0}
+              range={3}
+              onChange={getMovies}
+            />
           </div>
         </div>
       </div>
