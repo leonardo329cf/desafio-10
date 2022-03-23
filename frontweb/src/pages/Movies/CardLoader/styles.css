@@ -1,3 +1,10 @@
 .card-loader-container {
     display: flex;
+    padding: 10px;
+}
+
+@media (min-width: 786px) {
+    .card-loader-container {
+        padding: 20px;
+    }
 }
