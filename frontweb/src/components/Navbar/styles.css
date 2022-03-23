@@ -1,5 +1,6 @@
 .main-nav {
   height: 68px;
+  min-width: 320px;
 }
 
 .container-fluid {
