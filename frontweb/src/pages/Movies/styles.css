@@ -29,6 +29,11 @@
   flex-direction: column;
 }
 
+.movie-card-entry a {
+  display: flex;
+  height: 100%;
+}
+
 @media (min-width: 786px) {
   .movie-list-row {
     margin: -20px;
