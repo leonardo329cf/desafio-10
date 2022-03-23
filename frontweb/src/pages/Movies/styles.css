@@ -1,47 +1,47 @@
+.movies-root-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+}
+
 .movies-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
   padding: 15px;
 }
 
-.title-container {
-  padding-bottom: 50px;
-}
-
-.title-container h2 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
 .movies-list-container {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.movie-list-row {
+  margin: -10px;
+}
+
+.movie-card-entry {
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
-.movies-list-container a {
-  font-size: 18px;
-  font-weight: 400;
+@media (min-width: 786px) {
+  .movie-list-row {
+    margin: -20px;
+  }
+
+  .movie-card-entry {
+    padding: 20px;
+  }
 }
 
 @media (min-width: 1200px) {
   .movies-container {
+    max-width: 1200px;
     padding: 40px;
-  }
-
-  .title-container {
-    padding-bottom: 40px;
-  }
-
-  .title-container h2 {
-    font-size: 48px;
-  }
-
-  .movies-list-container {
-    gap: 30px;
-  }
-
-  .movies-list-container a {
-    font-size: 24px;
   }
 }
