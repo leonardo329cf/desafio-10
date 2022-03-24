@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Movie } from '../../types/movie';
 import { requestBackend } from '../../util/requests';
 
@@ -14,8 +15,6 @@ const MovieDetailsCard = ({ movieId }: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [hasError, setHasError] = useState(false);
-
   useEffect(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
@@ -26,11 +25,10 @@ const MovieDetailsCard = ({ movieId }: Props) => {
     setIsLoading(true);
     requestBackend(params)
       .then((response) => {
-        setHasError(false);
         setMovie(response.data);
       })
       .catch((error) => {
-        setHasError(true);
+        toast.error("Falha ao carregar filme")
       })
       .finally(() => {
         setIsLoading(false);
