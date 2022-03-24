@@ -1,0 +1,13 @@
+.card-loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+@media (min-width: 786px) {
+    .card-loader-container {
+        padding: 20px;
+    }
+}

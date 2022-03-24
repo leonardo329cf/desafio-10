@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { requestBackend } from '../../util/requests';
 import ReviewEntry from './ReviewEntry';
 import { Review } from '../../types/review';
+import CardLoader from './CardLoader';
 
 import './styles.css';
+import { toast } from 'react-toastify';
 
 type Props = {
   movieId: string;
@@ -17,8 +19,6 @@ const Reviews = ({ movieId, refresh }: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [hasError, setHasError] = useState(false);
-
   useEffect(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
@@ -29,11 +29,10 @@ const Reviews = ({ movieId, refresh }: Props) => {
     setIsLoading(true);
     requestBackend(params)
       .then((response) => {
-        setHasError(false);
         setReviews(response.data);
       })
       .catch((error) => {
-        setHasError(true);
+        toast.error("Falha ao carregar as avaliações")
       })
       .finally(() => {
         setIsLoading(false);
@@ -42,13 +41,13 @@ const Reviews = ({ movieId, refresh }: Props) => {
 
   return (
     <div className="reviews-container bg-secondary">
-      {!isLoading &&
-        !hasError &&
+      {isLoading ? (<CardLoader />) : (
         reviews?.map((review) => (
           <div className="review-entry" key={review.id}>
             <ReviewEntry review={review} />
           </div>
-        ))}
+        ))) 
+        }
     </div>
   );
 };
