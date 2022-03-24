@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Movie } from '../../types/movie';
 import { requestBackend } from '../../util/requests';
-
+import CardLoader from './CardLoader';
 import './styles.css';
 
 type Props = {
@@ -28,7 +28,7 @@ const MovieDetailsCard = ({ movieId }: Props) => {
         setMovie(response.data);
       })
       .catch((error) => {
-        toast.error("Falha ao carregar filme")
+        toast.error('Falha ao carregar filme');
       })
       .finally(() => {
         setIsLoading(false);
@@ -36,22 +36,28 @@ const MovieDetailsCard = ({ movieId }: Props) => {
   }, [movieId]);
 
   return (
-      <div className='movie-detail-card bg-secondary'>
-          <div className='movie-detail-card-img-container'>
-              <img src={movie?.imgUrl} alt='Movie'/>
+    <>
+      {!isLoading ? (
+        <div className="movie-detail-card bg-secondary">
+          <div className="movie-detail-card-img-container">
+            <img src={movie?.imgUrl} alt="Movie" />
           </div>
-          <div className='movie-detail-content-container'>
-              <div className='movie-detail-content-headers-container'>
-                  <h2>{movie?.title}</h2>
-                  <h3 className='text-tertiary'>{movie?.year}</h3>
-                  <h4>{movie?.subTitle}</h4>
-              </div>
-              <div className='movie-detail-content-synopsis-container'>
-                  <p>{movie?.synopsis}</p>
-              </div>
+          <div className="movie-detail-content-container">
+            <div className="movie-detail-content-headers-container">
+              <h2>{movie?.title}</h2>
+              <h3 className="text-tertiary">{movie?.year}</h3>
+              <h4>{movie?.subTitle}</h4>
+            </div>
+            <div className="movie-detail-content-synopsis-container">
+              <p>{movie?.synopsis}</p>
+            </div>
           </div>
-      </div>
-  )
+        </div>
+      ) : (
+        <CardLoader />
+      )}
+    </>
+  );
 };
 
 export default MovieDetailsCard;
