@@ -10,6 +10,7 @@ import Pagination from '../../components/Pagination';
 import MovieFilter from '../../components/MovieFilter';
 import { MovieFilterData } from '../../components/MovieFilter';
 import './styles.css';
+import { toast } from 'react-toastify';
 
 type ControlComponentsData = {
   activePage: number;
@@ -55,6 +56,9 @@ const Movies = () => {
     requestBackend(params)
       .then((response) => {
         setPage(response.data);
+      })
+      .catch(() => {
+        toast.error("Falha ao carregar filmes")
       })
       .finally(() => {
         setIsLoading(false);
