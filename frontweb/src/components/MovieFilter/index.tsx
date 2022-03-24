@@ -4,6 +4,8 @@ import Select from 'react-select';
 import { requestBackend } from 'util/requests';
 import { Genre } from '../../types/genre';
 
+import './styles.css';
+
 export type MovieFilterData = {
   genre: Genre | null;
 };

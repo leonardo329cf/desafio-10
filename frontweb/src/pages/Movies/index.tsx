@@ -68,7 +68,7 @@ const Movies = () => {
   return (
     <div className="movies-root-container">
       <div className="movies-container">
-        <div className="movies-filter-container">
+        <div className="movies-filter-container bg-secondary">
           <MovieFilter onChangeFilter={handleFilterChange} />
         </div>
         <div className="movies-list-container container-fluid">

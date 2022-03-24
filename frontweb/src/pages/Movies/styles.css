@@ -10,7 +10,16 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
+  gap: 20px;
+}
+
+.movies-filter-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 4px;
 }
 
 .movies-list-container {
@@ -35,7 +44,18 @@
   height: 100%;
 }
 
+@media (min-width: 576px) {
+  .movies-container {
+    padding: 20px;
+  }
+}
+
 @media (min-width: 786px) {
+  .movies-container {
+    gap: 40px;
+    padding: 40px;
+  }
+
   .movie-list-row {
     margin: -20px;
   }
@@ -49,5 +69,9 @@
   .movies-container {
     max-width: 1200px;
     padding: 40px;
+  }
+
+  .movies-filter-container {
+    padding: 15px 20px;
   }
 }
