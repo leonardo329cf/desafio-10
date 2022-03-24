@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 import { requestBackend } from 'util/requests';
 import { Genre } from '../../types/genre';
 
@@ -31,6 +32,9 @@ const MovieFilter = ({ onChangeFilter }: Props) => {
       requestBackend(params)
         .then((response) => {
             setGenresList(response.data);
+        })
+        .catch(() => {
+          toast.error("Falha ao buscar lista de gêneros")
         })
         .finally(() => {
           setIsLoading(false);
