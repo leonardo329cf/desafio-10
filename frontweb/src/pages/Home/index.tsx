@@ -12,7 +12,7 @@ const Home = () => {
             <h1>Avalie Filmes</h1>
             <h4>Diga o que você achou do seu filme favorito</h4>
           </div>
-          <img src={HomeImage} alt="Home image" />
+          <img src={HomeImage} alt="Home" />
         </div>
         <Login />
       </div>
