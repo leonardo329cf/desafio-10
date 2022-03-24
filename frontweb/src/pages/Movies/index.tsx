@@ -2,26 +2,52 @@ import { Link } from 'react-router-dom';
 import { Movie } from '../../types/movie';
 import MovieCard from '../../components/MovieCard';
 import { SpringPage } from '../../types/spring';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import CardLoader from './CardLoader';
 import Pagination from '../../components/Pagination';
-
+import MovieFilter from '../../components/MovieFilter';
+import { MovieFilterData } from '../../components/MovieFilter';
 import './styles.css';
+
+type ControlComponentsData = {
+  activePage: number;
+  filterData: MovieFilterData;
+};
 
 const Movies = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const getMovies = (pageNumber: number) => {
+  const [controlComponentsData, setControlComponentsData] =
+    useState<ControlComponentsData>({
+      activePage: 0,
+      filterData: { genre: null },
+    });
+
+  const handleFilterChange = (filterData: MovieFilterData) => {
+    setControlComponentsData({
+      activePage: 0,
+      filterData,
+    });
+  };
+
+  const handlePageChange = (activePage: number) => {
+    setControlComponentsData({
+      filterData: controlComponentsData.filterData,
+      activePage,
+    })
+  }
+  const getMovies = useCallback(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: '/movies',
       withCredentials: true,
       params: {
-        page: pageNumber,
+        page: controlComponentsData.activePage,
         linesPerPage: 4,
+        genreId: controlComponentsData.filterData.genre?.id,
       },
     };
 
@@ -33,15 +59,18 @@ const Movies = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  };
+  }, [controlComponentsData]);
 
   useEffect(() => {
-    getMovies(0);
-  }, []);
+    getMovies();
+  }, [getMovies]);
 
   return (
     <div className="movies-root-container">
       <div className="movies-container">
+        <div className="movies-filter-container">
+          <MovieFilter onChangeFilter={handleFilterChange} />
+        </div>
         <div className="movies-list-container container-fluid">
           <div className="row movie-list-row">
             {isLoading ? (
@@ -64,7 +93,7 @@ const Movies = () => {
             <Pagination
               pageCount={page ? page.totalPages : 0}
               range={3}
-              onChange={getMovies}
+              onChange={handlePageChange}
             />
           </div>
         </div>
