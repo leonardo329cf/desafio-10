@@ -1,4 +1,5 @@
 import './assets/styles/custom.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Routes from 'Routes';
 import { useState } from 'react';
@@ -13,7 +14,18 @@ function App() {
   return (
     <AuthContext.Provider value={{ authContextData, setAuthContextData }}>
       <Routes />
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme='colored'
+      />
     </AuthContext.Provider>
   );
 }

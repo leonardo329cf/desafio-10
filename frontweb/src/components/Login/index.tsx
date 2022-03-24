@@ -1,12 +1,13 @@
 import { useHistory, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { requestBackendLogin } from '../../util/requests';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext';
 import { saveAuthData } from '../../util/storage';
 import { getTokenData } from '../../util/auth';
 
 import './styles.css';
+import { toast } from 'react-toastify';
 
 type FormData = {
   username: string;
@@ -24,8 +25,6 @@ const Login = () => {
 
   const { setAuthContextData } = useContext(AuthContext);
 
-  const [hasError, setHasError] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -38,7 +37,6 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);
-        setHasError(false);
         setAuthContextData({
           authenticated: true,
           tokenData: getTokenData(),
@@ -46,8 +44,7 @@ const Login = () => {
         history.replace(from);
       })
       .catch((error) => {
-        setHasError(true);
-        console.log('ERRO', error);
+        toast.error("Erro ao tentar efetuar o login");
       });
   };
 
@@ -56,9 +53,6 @@ const Login = () => {
       <div className="title-container">
         <h1>LOGIN</h1>
       </div>
-      {hasError && (
-        <div className="alert alert-danger">Erro ao tentar efetuar o login</div>
-      )}
       <div className="form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="inputs-container">
