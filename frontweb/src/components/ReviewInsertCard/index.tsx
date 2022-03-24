@@ -59,6 +59,9 @@ const ReviewInsertCard = ({ movieId, refresh }: Props) => {
           placeholder="Deixe sua avaliação aqui"
           name="text"
         />
+        <div className="invalid-feedback d-block">
+                {errors.text?.message}
+              </div>
         <button className="btn btn-tertiary">
           <h6>SALVAR AVALIAÇÃO</h6>
         </button>
