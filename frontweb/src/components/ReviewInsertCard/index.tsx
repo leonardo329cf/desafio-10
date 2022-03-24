@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
-import { useState } from 'react';
 import { requestBackend } from '../../util/requests';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import './styles.css';
 
@@ -22,8 +22,6 @@ const ReviewInsertCard = ({ movieId, refresh }: Props) => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const [hasError, setHasError] = useState(false);
-
   const onSubmit = (formData: FormData) => {
     const params: AxiosRequestConfig = {
       method: 'POST',
@@ -36,15 +34,14 @@ const ReviewInsertCard = ({ movieId, refresh }: Props) => {
     };
     requestBackend(params)
       .then((response) => {
-        setHasError(false);   
+        toast.success("Avaliação enviada")
         setValue('text','');     
         if (refresh !== undefined) {
           refresh();
         }
       })
-      .catch((error) => {
-        setHasError(true);
-        console.log('ERRO', error);
+      .catch(() => {
+        toast.error("Erro ao submeter avaliação");
       });
   };
 
@@ -66,9 +63,6 @@ const ReviewInsertCard = ({ movieId, refresh }: Props) => {
           <h6>SALVAR AVALIAÇÃO</h6>
         </button>
       </form>
-      {hasError && (
-        <div className="alert alert-danger">Erro ao submeter avaliação</div>
-      )}
     </div>
   );
 };
