@@ -1,7 +1,7 @@
 # Movieflix
 Esse aplicativo permite ver o catálogo de filmes e postar comentários nos mesmos.
 
-O projeto foi feito em Java e Springboot, e Typescript e React.
+O projeto foi feito em Java e Springboot, e Typescript e React como parte do [Bootcamp Spring React](https://devsuperior.com.br).
 
 ---
 ### Navegando na Aplicação
@@ -45,7 +45,7 @@ Exitem dois Grupos de Permissões(Roles):
 - ROLE_MEMBER: pode acessar o catalogo de filmes, ver detalhes dos filmes e ver e criar as avaliações dos filmes. Usuário Ana é Membro.
 
 ### Testes
-O projeto foi testado com testes de integração utilizando as ferramentas de teste do spring e JUnit.
+O projeto foi testado com testes de integração utilizando as ferramentas de teste do spring e JUnit. Os testes foram feitos pelo professor e o resto do projeto por mim em metodologia de Desenvolvimento Orientado a Testes(TDD).
   - Executando os testes de integração:
     - No Eclipse IDE > Run > Run COnfiguration > JUnit.
       - Selecione a segunda opção("Run all tests in the selected project, package or source folder").
