@@ -76,7 +76,7 @@ Será necessário Node 14 para executar o projeto.
   - Utilizando o NVM(Node Version Manager): https://github.com/nvm-sh/nvm.
     - executando "nvm install 14".
 - Após a instalação do Node, e consequentemente do NPMm instale o Yarn:
-  - npm install yarn.
+  - npm install --global yarn.
 
 ### Executando a Apĺicação
 Dentro da pasta frontweb execute:
